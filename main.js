@@ -1,6 +1,4 @@
 const log = console.log;
-let humanScore = 0;
-let computerScore = 0;
 
 function getComputerChoice() {
 
@@ -25,50 +23,75 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
-
-    let humanChoiceLower = humanChoice.toLowerCase();
-
-    log("computer choice is now " + computerChoice)
-    log("human choice is now " + humanChoiceLower)
-
-    // If player chooses rock:
-    if (humanChoiceLower == "rock")
-        if (computerChoice == "rock")
-            log("You tied!")
-        else if (computerChoice == "scissors")
-            log("You win! Rock beats scissors"),
-            humanScore++
-        else
-            log("You lose! Paper beats rock"),
-            computerScore++
-
-    // If player chooses scissors:
-    else if (humanChoiceLower == "scissors")
-        if (computerChoice == "scissors")
-            log("You tied!")
-        else if (computerChoice == "paper")
-            log("You win! scissors beats paper"),
-            humanScore++
-        else
-            log("You lose! rock beats scissors"),
-            computerScore++
-
-    // If player chooses paper
-    else   
-        if (computerChoice == "paper")
-            log("You tied!")
-        else if (computerChoice == "rock")
-            log("You win! paper beats rock"),
-            humanScore++
-        else
-            log("You lose! scissors beats paper"),
-            computerScore++
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
     
-    log("Human score is " + humanScore)
-    log("Computer score is " + computerScore)
-} 
+    for (let i = 0; i < 5; i++) {
+        computerChoice = getComputerChoice()
+        humanChoice = getHumanChoice()
 
-computerChoice = getComputerChoice()
-humanChoice = getHumanChoice()
-playRound(humanChoice, computerChoice)
+        winner = playRound(humanChoice, computerChoice, humanScore, computerScore)
+
+        if (winner == "human")
+            humanScore++
+        else if (winner == "computer")
+            computerScore++
+    }
+
+    function playRound(humanChoice, computerChoice, humanScore, computerScore) {
+
+        let humanChoiceLower = humanChoice.toLowerCase();
+        let winner = ""
+    
+        log("computer choice is now " + computerChoice)
+        log("human choice is now " + humanChoiceLower)
+    
+        // If player chooses rock:
+        if (humanChoiceLower == "rock")
+            if (computerChoice == "rock")
+                log("You tied!")
+            else if (computerChoice == "scissors")
+                log("You win! Rock beats scissors"),
+                winner = "human",
+                humanScore++
+            else
+                log("You lose! Paper beats rock"),
+                winner = "computer",
+                computerScore++
+    
+        // If player chooses scissors:
+        else if (humanChoiceLower == "scissors")
+            if (computerChoice == "scissors")
+                log("You tied!")
+            else if (computerChoice == "paper")
+                log("You win! scissors beats paper"),
+                winner = "human",
+                humanScore++
+            else
+                log("You lose! rock beats scissors"),
+                winner = "computer",
+                computerScore++
+    
+        // If player chooses paper
+        else   
+            if (computerChoice == "paper")
+                log("You tied!")
+            else if (computerChoice == "rock")
+                log("You win! paper beats rock"),
+                winner = "human",
+                humanScore++
+            else
+                log("You lose! scissors beats paper"),
+                winner = "computer",
+                computerScore++
+        
+        log("Human score is " + humanScore)
+        log("Computer score is " + computerScore)
+        log("--------------------------------------")
+
+        return winner;
+    } 
+}
+
+playGame()
