@@ -2,6 +2,7 @@ const log = console.log;
 let humanScore = 0;
 let computerScore = 0;
 let roundNum = 1;
+let gameCount = 1;
 
 function getComputerChoice() {
 
@@ -20,7 +21,7 @@ function getComputerChoice() {
 }
 
 function playRound(humanChoice) {
-    winner = ""
+    winner = "";
     computerChoice = getComputerChoice();
 
     if (humanChoice == "rock")
@@ -64,13 +65,18 @@ function playRound(humanChoice) {
 
     if (roundNum > 5) {
         if (humanScore == computerScore)
-            log("You tied with the computer!")
+            log("You tied with the computer in game " + gameCount + "!");
         else if(humanScore > computerScore)
-            log("Congratulations! You beat the computer " + humanScore + " to " + computerScore)
+            log("Congratulations! You beat the computer " + humanScore + " to " + computerScore + " in game " + gameCount + "!");
         else
-            log("You lost " + humanScore + " to " + computerScore + " against the computer. Try again?")
-    }
-};
+            log("You lost " + humanScore + " to " + computerScore + " in game " + gameCount + " against the computer. Try again?");
+
+    roundNum = 1;
+    humanScore = 0;
+    computerScore = 0;
+    };
+};  
+
 
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
