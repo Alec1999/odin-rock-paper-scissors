@@ -72,6 +72,7 @@ function playRound(humanChoice) {
         else
             results.textContent = "You lost " + humanScore + " to " + computerScore + " in game " + gameCount + " against the computer. Try again?";
 
+    gameCount++;
     roundNum = 1;
     humanScore = 0;
     computerScore = 0;
