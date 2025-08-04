@@ -1,4 +1,7 @@
 const log = console.log;
+let humanScore = 0;
+let computerScore = 0;
+let roundNum = 1;
 
 function getComputerChoice() {
 
@@ -16,99 +19,71 @@ function getComputerChoice() {
     return outcome;
 }
 
-function getHumanChoice() {
+function playRound(humanChoice) {
+    winner = ""
+    computerChoice = getComputerChoice();
 
-    // collect human choice for rock, paper, or scissors
-    let humanChoice = prompt("Rock, paper or scissors?")
-    return humanChoice;
-}
+    if (humanChoice == "rock")
+        if (computerChoice == "rock")
+            log("You tied round " + roundNum + "!")
+        else if (computerChoice == "scissors")
+            log("You win in round " + roundNum + "! Rock beats scissors"),
+            winner = "human";
+        else
+            log("You lose round " + roundNum + "! Paper beats rock"),
+            winner = "computer";
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let roundNum = 1;
-    
-    for (let i = 0; i < 5; i++) {
-        computerChoice = getComputerChoice()
-        humanChoice = getHumanChoice()
+    // If player chooses scissors:
+    else if (humanChoice == "scissors")
+        if (computerChoice == "scissors")
+            log("You tied in round " + roundNum + "!")
+        else if (computerChoice == "paper")
+            log("You win round " + roundNum + "! scissors beats paper"),
+            winner = "human";
+        else
+            log("You lose round " + roundNum + "! rock beats scissors"),
+            winner = "computer";
 
-        winner = playRound(humanChoice, computerChoice, humanScore, computerScore, roundNum)
+    // If player chooses paper
+    else if (humanChoice == "paper")  
+        if (computerChoice == "paper")
+            log("You tied in round " + roundNum + "!")
+        else if (computerChoice == "rock")
+            log("You win round " + roundNum + "! paper beats rock"),
+            winner = "human";
+        else
+            log("You lose round " + roundNum + "! scissors beats paper"),
+            winner = "computer";
 
-        roundNum++
+    if (winner == "human")
+        humanScore++;
+    else if (winner == "computer")
+        computerScore++;
 
-        if (winner == "human")
-            humanScore++
-        else if (winner == "computer")
-            computerScore++
+    roundNum++;
+
+    if (roundNum > 5) {
+        if (humanScore == computerScore)
+            log("You tied with the computer!")
+        else if(humanScore > computerScore)
+            log("Congratulations! You beat the computer " + humanScore + " to " + computerScore)
+        else
+            log("You lost " + humanScore + " to " + computerScore + " against the computer. Try again?")
     }
+};
 
-    log(" ")
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
 
-    if (humanScore == computerScore)
-        log("You tied with the computer!")
-    else if(humanScore > computerScore)
-        log("Congratulations! You beat the computer " + humanScore + " to " + computerScore)
-    else
-        log("You lost " + humanScore + " to " + computerScore + " against the computer. Try again?")
+rockBtn.addEventListener("click", () => {
+    playRound("rock");
+});
+paperBtn.addEventListener("click", () => {
+    playRound("paper");
+});
+scissorsBtn.addEventListener("click", () => {
+    playRound("scissors");
+});
 
-
-    function playRound(humanChoice, computerChoice, humanScore, computerScore, roundNumber) {
-
-        let humanChoiceLower = humanChoice.toLowerCase();
-        let winner = ""
-    
-        log(" ")
-        log("The computer chose " + computerChoice)
-        log("You chose " + humanChoiceLower)
-        log(" ")
-    
-        // If player chooses rock:
-        if (humanChoiceLower == "rock")
-            if (computerChoice == "rock")
-                log("You tied round " + roundNumber + "!")
-            else if (computerChoice == "scissors")
-                log("You win in round " + roundNumber + "! Rock beats scissors"),
-                winner = "human",
-                humanScore++
-            else
-                log("You lose round " + roundNumber + "! Paper beats rock"),
-                winner = "computer",
-                computerScore++
-    
-        // If player chooses scissors:
-        else if (humanChoiceLower == "scissors")
-            if (computerChoice == "scissors")
-                log("You tied in round " + roundNumber + "!")
-            else if (computerChoice == "paper")
-                log("You win round " + roundNumber + "! scissors beats paper"),
-                winner = "human",
-                humanScore++
-            else
-                log("You lose round " + roundNumber + "! rock beats scissors"),
-                winner = "computer",
-                computerScore++
-    
-        // If player chooses paper
-        else   
-            if (computerChoice == "paper")
-                log("You tied in round " + roundNumber + "!")
-            else if (computerChoice == "rock")
-                log("You win round " + roundNumber + "! paper beats rock"),
-                winner = "human",
-                humanScore++
-            else
-                log("You lose round " + roundNumber + "! scissors beats paper"),
-                winner = "computer",
-                computerScore++
-        
-        log(" ")
-        log("Your score is " + humanScore)
-        log("The computers score is " + computerScore)
-        log(" ")
-        log("--------------------------------------")
-
-        return winner;
-    } 
-}
-
-playGame()
+const resultsDisplay = document.querySelector("results-display");
