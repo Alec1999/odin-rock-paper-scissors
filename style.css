@@ -1,4 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: sans-serif;
+}
+
 button {
-    width: 150px;
-    height: 100px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+}
+
+#buttons {
+    display: flex;
+    gap: 15px;
+}
+
+#container {
+    transform: translateY(-100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+#score-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

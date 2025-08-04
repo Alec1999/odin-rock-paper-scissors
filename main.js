@@ -62,7 +62,7 @@ function playRound(humanChoice) {
         computerScore++;
 
     roundNum++;
-    currentScore.textContent = "Your score: " + humanScore + " Computer score " + computerScore;
+    currentScore.textContent = "Your score: " + humanScore + " Computer score: " + computerScore;
 
     if (roundNum > 5) {
         if (humanScore == computerScore)
