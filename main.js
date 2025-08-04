@@ -26,34 +26,34 @@ function playRound(humanChoice) {
 
     if (humanChoice == "rock")
         if (computerChoice == "rock")
-            log("You tied round " + roundNum + "!")
+            results.textContent = "You tied round " + roundNum + "!"
         else if (computerChoice == "scissors")
-            log("You win in round " + roundNum + "! Rock beats scissors"),
+            results.textContent = "You win in round " + roundNum + "! Rock beats scissors",
             winner = "human";
         else
-            log("You lose round " + roundNum + "! Paper beats rock"),
+        results.textContent = "You lose round " + roundNum + "! Paper beats rock",
             winner = "computer";
 
     // If player chooses scissors:
     else if (humanChoice == "scissors")
         if (computerChoice == "scissors")
-            log("You tied in round " + roundNum + "!")
+            results.textContent = "You tied in round " + roundNum + "!";
         else if (computerChoice == "paper")
-            log("You win round " + roundNum + "! scissors beats paper"),
+            results.textContent = "You win round " + roundNum + "! scissors beats paper",
             winner = "human";
         else
-            log("You lose round " + roundNum + "! rock beats scissors"),
+            results.textContent = "You lose round " + roundNum + "! rock beats scissors",
             winner = "computer";
 
     // If player chooses paper
     else if (humanChoice == "paper")  
         if (computerChoice == "paper")
-            log("You tied in round " + roundNum + "!")
+            results.textContent = "You tied in round " + roundNum + "!";
         else if (computerChoice == "rock")
-            log("You win round " + roundNum + "! paper beats rock"),
+            results.textContent = "You win round " + roundNum + "! paper beats rock",
             winner = "human";
         else
-            log("You lose round " + roundNum + "! scissors beats paper"),
+            results.textContent = "You lose round " + roundNum + "! scissors beats paper",
             winner = "computer";
 
     if (winner == "human")
@@ -62,14 +62,15 @@ function playRound(humanChoice) {
         computerScore++;
 
     roundNum++;
+    currentScore.textContent = "Your score: " + humanScore + " Computer score " + computerScore;
 
     if (roundNum > 5) {
         if (humanScore == computerScore)
-            log("You tied with the computer in game " + gameCount + "!");
+            results.textContent = "You tied with the computer in game " + gameCount + "!";
         else if(humanScore > computerScore)
-            log("Congratulations! You beat the computer " + humanScore + " to " + computerScore + " in game " + gameCount + "!");
+            results.textContent = "Congratulations! You beat the computer " + humanScore + " to " + computerScore + " in game " + gameCount + "!";
         else
-            log("You lost " + humanScore + " to " + computerScore + " in game " + gameCount + " against the computer. Try again?");
+            results.textContent = "You lost " + humanScore + " to " + computerScore + " in game " + gameCount + " against the computer. Try again?";
 
     roundNum = 1;
     humanScore = 0;
@@ -92,4 +93,8 @@ scissorsBtn.addEventListener("click", () => {
     playRound("scissors");
 });
 
-const resultsDisplay = document.querySelector("results-display");
+const resultsDisplay = document.querySelector("#results-display");
+const results = document.createElement("div");
+const currentScore = document.querySelector("#current-score");
+resultsDisplay.appendChild(results);
+
